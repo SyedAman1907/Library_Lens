@@ -537,25 +537,6 @@ The following items are planned enhancements:
 ## 📸 Screenshots
 
 Screenshots will be added here.
-
----
-
-## 🎥 Demo
-
-| Resource | Link |
-| :--- | :--- |
-| **Demo Video** | *[Add demo link]* |
-| **Live Demo** | *[Add deployment link]* |
-| **GitHub** | [https://github.com/SyedAman1907/Library_Lens](https://github.com/SyedAman1907/Library_Lens) |
-
----
-
-## 👤 Team
-
-**Syed Aman Mirzanullah** — Project Lead & Full-Stack Architecture
-
----
-
 ## 📄 License
 
 This project is licensed under the [MIT License](package.json).
