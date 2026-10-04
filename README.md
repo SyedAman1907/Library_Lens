@@ -533,10 +533,6 @@ The following items are planned enhancements:
 - **Repository Safety**: `.env` files are excluded by `.gitignore`.
 
 ---
-
-## 📸 Screenshots
-
-Screenshots will be added here.
 ## 📄 License
 
 This project is licensed under the [MIT License](package.json).
