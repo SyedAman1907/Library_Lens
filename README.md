@@ -1,53 +1,54 @@
-# LibraryLens AI
+# 📚 Library Lens
 
-> **Evidence-backed AI research assistant and empirical model intelligence platform powered by Google Gemini, the Model Context Protocol (MCP), and multi-source verification.**
+> **Evidence-backed AI research assistant and empirical model intelligence engine powered by Google Gemini, the Model Context Protocol (MCP), and multi-source verification.**
 
 ---
 
 ## 🚀 Overview
 
-**LibraryLens AI** is an intelligent full-stack research and decision-support system designed for software engineers, tech leads, and system architects. Modern engineering teams waste hours evaluating frameworks, validating software packages, and comparing rapidly evolving AI models against conflicting documentation, marketing claims, and outdated benchmarks. 
+**Library Lens** is an intelligent, full-stack research and decision-support platform designed for software engineers, architects, and technical leaders. Modern engineering teams waste hours evaluating libraries, validating software packages, and comparing rapidly evolving AI models against conflicting documentation, marketing claims, and outdated benchmarks.
 
-Instead of relying on static AI memory or unverifiable conversational outputs, LibraryLens AI pairs **Google Gemini as an evidence-driven reasoning engine** with a dedicated **Model Context Protocol (MCP) search layer** and live registry crawlers. Every claim, capability metric, release date, and architectural trade-off is cross-referenced with real-time official documentation, package registries, GitHub changelogs, and empirical provider telemetry.
+Instead of relying on static AI memory or conversational models prone to hallucination, Library Lens pairs **Google Gemini as an evidence-driven reasoning engine** with a dedicated **Python Model Context Protocol (MCP) search layer** and direct registry crawlers. Every claim, capability metric, version number, release date, and architectural trade-off is strictly validated and tied to verifiable source URLs.
+
+$$\text{\bf NO SOURCE = NO FACT}$$
 
 ---
 
 ## 🎯 Problem Statement
 
-1. **AI Hallucinations in Technical Decision-Making**: Standard LLMs routinely hallucinate non-existent APIs, deprecated syntax, obsolete version numbers, and inaccurate pricing or context limits.
-2. **Rapid AI Model Velocity**: AI providers release, update, and deprecate models at an unprecedented pace. Engineering teams struggle to objectively compare capabilities, token pricing, and context windows across providers.
-3. **Information Fragmentation**: Assessing two libraries or models requires opening dozens of tabs across GitHub releases, package registries (npm, PyPI, crates.io), pricing calculators, and community forums.
-4. **Unverifiable "Best" Claims**: Most comparison tools declare arbitrary winners without empirical evidence, architectural context, or citations that can be independently audited.
+1. **AI Hallucinations in Technical Decisions**: Traditional LLMs frequently hallucinate APIs, recommend deprecated packages, invent release dates, and present inaccurate pricing or context limits.
+2. **Rapid AI Model Velocity**: AI providers release, update, and deprecate models at an unprecedented rate. Teams struggle to objectively compare token pricing, context handling, and real-world capabilities across providers.
+3. **Information Fragmentation**: Comparing two libraries or models requires checking dozens of browser tabs across GitHub changelogs, package registries (npm, PyPI, crates.io), provider pricing calculators, and community forums.
+4. **Unverifiable Recommendations**: Most comparison tools declare arbitrary "winners" without verifiable empirical evidence or an audit trail.
 
 ---
 
 ## 💡 Solution
 
-LibraryLens AI enforces a strict architectural principle:
+Library Lens enforces complete grounding and transparency:
 
-$$\text{\bf NO SOURCE = NO FACT}$$
-
-- **Grounding in Verified Evidence**: Claims are validated against primary sources (official documentation, GitHub tags, npm/PyPI/crates metadata, official release notes). If evidence cannot be retrieved, the system reports: `Insufficient verified evidence found.`
-- **Empirical AI Model Comparison**: Side-by-side technical evaluation of model capabilities (context window ratio, input/output pricing per 1M tokens, feature diffs, and documented citations).
-- **Interactive Claim Challenge**: Users can challenge any synthesized claim or model recommendation, prompting the system to perform targeted counter-source research and update the assessment.
-- **Model Context Protocol (MCP) Layer**: A decoupled Python service exposing standard MCP tools (`web_search`, `news_search`, `images_search` via SerpApi) to supply real-time web evidence to the Node.js backend.
-- **Resilient Multi-Tier Persistence**: MongoDB caching with automatic, seamless fallback to an in-memory database if no local MongoDB instance is present.
+- **Strict Source Grounding**: Every technical claim is cross-referenced with primary documentation, package registries, and official GitHub releases. If empirical evidence cannot be retrieved, the system explicitly reports: `Insufficient verified evidence found.`
+- **Side-by-Side Empirical Comparison**: Side-by-side technical evaluation of AI models and software libraries, displaying exact context windows, token pricing ratios, capability matrices, and evidence counts.
+- **Interactive Claim Auditing**: Users can challenge any synthesized statement or model recommendation to trigger targeted re-verification and counter-evidence retrieval.
+- **Model Context Protocol (MCP) Architecture**: Live search tools (`web_search`, `news_search`, `images_search` via SerpApi) are decoupled into a dedicated Python MCP service.
+- **Resilient Fallback Persistence**: MongoDB caching with an automatic, zero-config in-memory database fallback if MongoDB is not running locally.
 
 ---
 
 ## ✨ Key Features
 
-- **Live Multi-Source Library Research**: In-depth comparison of two libraries for specific use cases (e.g., high-throughput microservices, state management, dashboard scalability).
-- **Empirical AI Model Comparison**: Side-by-side comparison of AI models (e.g., Gemini 2.5 Flash vs. Claude 3.5 Sonnet vs. GPT-4o) showing exact context windows, pricing, capability diffs, and evidence sources.
-- **AI Model Radar & Autonomous Sync**: Background scheduler that synchronizes with 8+ AI provider registries (Google, OpenAI, Anthropic, Mistral, Groq, OpenRouter, Cohere, Together) to detect new, updated, and deprecated models.
-- **Model Recommendation Engine**: Natural language requirements analyzer that extracts constraints (modality, latency, context size, budget) and scores candidates with an interactive counter-evidence challenge mechanism.
-- **Strict 5-Tier Citation Hierarchy**: Evaluates source reliability across primary technical docs, package registries, company announcements, tech media, and community sources.
-- **Citation Validation & Anti-Hallucination Filter**: Post-processing validation that purges unverified citations or mismatched claims before client presentation.
-- **Interactive Claim Audit & Challenge**: One-click claim challenging that triggers targeted re-verification against web sources to confirm or refute statements.
-- **Real-Time Progress Streaming**: Authentic Server-Sent Events (SSE) stream backend progress across research planning, registry queries, search execution, and Gemini synthesis.
-- **Dynamic Ecosystem & Typo Detection**: Automatically identifies package ecosystems (npm, PyPI, crates.io) and suggests spelling corrections (e.g., `FastAPi` $\rightarrow$ `FastAPI`, `Reac` $\rightarrow$ `React`).
-- **Research Version History & Replay**: Tracks report revisions over time and allows stepping through intermediate research artifacts.
-- **Export & Shareability**: Multi-format exports including Markdown, PDF print stylesheet, clipboard copying, and shareable deep links (`/?id=...`).
+- 🔍 **Multi-Source Evidence Research**: Real-time technical investigation querying official documentation, GitHub releases, changelogs, and package registries.
+- 🤖 **Empirical AI Model Comparison**: Side-by-side evaluation of AI models (e.g., Gemini 2.5 Flash vs. Claude 3.5 Sonnet vs. GPT-4o) comparing context limits, context ratios, 1M token input/output pricing, shared vs. unique capability diffs, and evidence citations.
+- 📡 **Model Context Protocol (MCP) Layer**: Decoupled Python FastAPI MCP server exposing standard MCP tools (`web_search`, `news_search`, `images_search` via SerpApi) to the Node.js backend.
+- 🛡️ **Citation Validation & Anti-Hallucination Filter**: Automated validation pipeline that purges unverified citations or mismatched assertions before rendering.
+- ⚖️ **Interactive Claim Challenge**: One-click claim auditing that initiates targeted counter-searches to verify, qualify, or refute specific assertions.
+- 🎯 **AI Model Recommendation Engine**: Natural language requirements analyzer that extracts constraints (modality, latency, context size, budget) and scores candidates with counter-evidence verification.
+- 🔄 **Autonomous Model Radar & Provider Sync**: Background scheduler monitoring 8+ AI provider registries (Google, OpenAI, Anthropic, Mistral, Groq, OpenRouter, Cohere, Together) to detect new, updated, and deprecated models.
+- ⚡ **Real-Time Progress Streaming (SSE)**: Authentic Server-Sent Events updating frontend users step-by-step through search queries, registry fetches, and Gemini synthesis.
+- 📦 **Dynamic Multi-Ecosystem Detection**: Automatically resolves npm, PyPI, and crates.io packages with built-in typo suggestion (e.g., `FastAPi` $\rightarrow$ `FastAPI`, `Reac` $\rightarrow$ `React`).
+- 💾 **Resilient Dual-Tier Persistence**: Production MongoDB caching with zero-configuration fallback to an embedded in-memory database.
+- 📑 **Version History & Step Replay**: Tracks research report revisions over time and enables stepping through intermediate research artifacts.
+- 📤 **Export & Multi-Format Sharing**: Markdown export, PDF print-optimized stylesheet, clipboard copy, and persistent deep links (`/?id=...`).
 
 ---
 
@@ -55,84 +56,79 @@ $$\text{\bf NO SOURCE = NO FACT}$$
 
 ```mermaid
 flowchart TD
-    User([User / Developer]) -->|Query / Model Selection| UI[React + Vite Frontend]
-    UI -->|HTTP / SSE Stream| API[Express + TypeScript Backend]
+    User([User / Developer]) -->|Query or Model Selection| Frontend[React 18 + Vite UI]
+    Frontend -->|HTTP / SSE Stream| Backend[Node.js + Express API]
 
-    subgraph "Evidence Collection Layer"
-        API -->|Tool Call| MCP[Python FastAPI MCP Server]
+    subgraph Evidence_Layer ["Evidence Collection Layer"]
+        Backend -->|MCP Tool Calls| MCP[Python FastAPI MCP Server]
         MCP -->|SerpApi| WebSearch[Live Web Search]
         MCP -->|SerpApi| NewsSearch[Google News Search]
         MCP -->|SerpApi| ImageSearch[Visual References]
-        API -->|Direct API| Registries[npm / PyPI / crates.io / GitHub]
-        API -->|Provider Adapters| ModelCatalogs[8+ AI Model Catalogs]
+        Backend -->|REST Queries| Registries[npm / PyPI / crates.io / GitHub]
+        Backend -->|Discovery Adapters| Providers[8+ AI Provider Catalogs]
     end
 
-    subgraph "Verification & Synthesis Engine"
-        WebSearch & NewsSearch & Registries --> Collector[Evidence Collector & Normalizer]
-        Collector --> Dedupe[URL Deduplication & Tier Ranking]
-        Dedupe --> CitationFilter[Citation Validator]
-        CitationFilter --> Gemini[Google Gemini Reasoning Engine]
-        Gemini --> ReportGen[Structured Empirical Report / Diff]
+    subgraph Synthesis_Engine ["Verification & Synthesis Engine"]
+        WebSearch & NewsSearch & Registries --> Collector[Evidence Collector]
+        Collector --> Ranker[Deduplicator & 5-Tier Quality Ranker]
+        Ranker --> Validator[Citation & Anti-Hallucination Validator]
+        Validator --> Gemini[Google Gemini Reasoning Engine]
+        Gemini --> ReportGen[Structured Empirical Report & Diffs]
     end
 
-    subgraph "Persistence"
+    subgraph Storage ["Persistence"]
         ReportGen --> DB[(MongoDB / In-Memory Store)]
     end
 
-    DB --> UI
-    ReportGen -->|Live SSE Stream| UI
+    DB --> Frontend
+    ReportGen -->|Live SSE Stream| Frontend
 ```
 
-### End-to-End Workflow
+### Complete Workflow
 
-1. **Input Submission**: The user submits two libraries or selects two AI models for comparison, optionally specifying architectural constraints or use-case requirements.
-2. **Query Planning & Ecosystem Resolution**: The orchestrator normalizes library names, resolves the package registry (npm, PyPI, or crates.io), and formulates targeted search queries.
-3. **Parallel Evidence Gathering**: The backend queries package registries, GitHub release tags, and the Python MCP server (`web_search`, `news_search`) concurrently.
-4. **Deduplication & Quality Tiering**: Collected sources are normalized, deduplicated, and ranked against the 5-Tier Source Quality Hierarchy.
-5. **Gemini Evidence Synthesis**: Validated evidence snippets and raw metadata are supplied to Google Gemini with strict prompt constraints forbidding uncited facts.
-6. **Citation Audit**: Citations are verified against the ingested source list; any unverified assertions are purged or flagged.
-7. **Storage & Streaming**: The final structured report is cached in MongoDB (or in-memory store) and rendered in real-time on the frontend via SSE.
+1. **Submission**: The user submits two software libraries or selects two AI models, optionally adding architectural constraints or target use cases.
+2. **Query Planning & Ecosystem Resolution**: The query planner normalizes names, determines the target ecosystem (`npm`, `PyPI`, or `crates.io`), and generates targeted search queries.
+3. **Concurrent Evidence Collection**: The backend concurrently queries package registries, GitHub release tags, and the Python MCP service (`web_search`, `news_search`).
+4. **Deduplication & Quality Tiering**: Sources are deduplicated and classified into the 5-Tier Source Quality Hierarchy.
+5. **Gemini Synthesis**: Validated evidence snippets and metadata are supplied to Google Gemini with strict anti-hallucination prompt instructions.
+6. **Citation Audit**: Citations in the generated content are matched against retrieved sources; uncited assertions are flagged or removed.
+7. **Storage & Streaming**: The final report is cached and streamed in real-time to the React client via Server-Sent Events.
 
 ---
 
 ## 🏗️ System Architecture
 
 ### 1. Frontend
-- **Framework**: React 18 with Vite and TypeScript.
+- **Framework**: React 18, Vite, TypeScript.
 - **Styling**: Tailwind CSS with custom glassmorphism, responsive two-column layouts, and dark mode palette.
-- **State & Data Handling**: Custom hooks (`useTheme`), Server-Sent Events client for real-time progress, and modular views (`Hero`, `ReportView`, `ModelRadar`, `ModelRecommendationView`, `ModelCompareModal`).
-- **Icons & Animation**: Lucide React and Framer Motion.
+- **Interactive Components**: `ModelCompareModal`, `ModelRadar`, `ModelRecommendationView`, `ClaimChallengeModal`, `ReportView`, `EvidenceGraph`, `Hero`, `Navbar`, and `Sidebar`.
+- **State & Streaming**: Custom hooks (`useTheme`), Server-Sent Events client for real-time progress.
 
 ### 2. Backend
-- **Framework**: Node.js with Express and TypeScript (executed via `tsx` in development).
-- **Orchestration**: Specialized modules for research orchestration (`planner`, `analyzer`, `orchestrator`, `normalizer`), evidence management (`collector`, `deduplicator`, `ranker`, `cross_checker`), and citation validation.
-- **Model Intelligence**: Background scheduler (`modelScheduler`) running periodic syncs across AI providers, a research queue with configurable concurrency, and a recommendation engine.
+- **Framework**: Node.js, Express, TypeScript (executed via `tsx` in development).
+- **Research Orchestration**: Specialized modules for research orchestration (`planner`, `analyzer`, `orchestrator`, `normalizer`), evidence management (`collector`, `deduplicator`, `ranker`, `cross_checker`), and citation validation.
+- **Model Intelligence**: Background scheduler (`modelScheduler`), concurrency-limited research queue, and recommendation engine.
 
 ### 3. AI / ML Components
-- **Reasoning Engine**: Google Gemini API (`@google/generative-ai`) used for structured evidence extraction, technical trade-off evaluation, claim verification, and requirements-to-model matching.
-- **Prompt Constraints**: Zero-shot and few-shot prompts strictly conditioned on supplied evidence context.
+- **Reasoning Engine**: Google Gemini API (`@google/generative-ai`) for evidence extraction, neutral trade-off analysis, claim verification, and requirement-to-model matching.
 
-### 4. APIs
-- **REST Endpoints**:
-  - `/api/research`: Initiate research, retrieve reports, view sources, inspect evidence, challenge claims, review versions, and replay steps.
-  - `/api/library`: Package registry metadata and GitHub release tags.
-  - `/api/models`: Model listing, radar telemetry, manual/scheduled sync, side-by-side comparison, notifications, and recommendations.
-  - `/api/health`: Comprehensive system health diagnostics (MongoDB, MCP server, Gemini API).
-- **Streaming**: Server-Sent Events (SSE) at `/api/research/stream/:id`.
+### 4. APIs & Endpoints
+- **Research**: `/api/research` (initiate, retrieve, refresh, list history, delete, view sources, inspect evidence, challenge claims, review versions, replay steps).
+- **Libraries**: `/api/library/:name` (package registry metadata), `/api/library/:name/releases` (GitHub release notes and tags).
+- **AI Models**: `/api/models` (list, details, history, force research), `/api/models/radar` (provider health and sync stats), `/api/models/compare` (side-by-side empirical comparison), `/api/models/recommendations` (analyze, challenge, refresh, saved use cases).
+- **Health**: `/api/health` (MongoDB, MCP server, and Gemini API diagnostics).
+- **Streaming**: `/api/research/stream/:id` (Server-Sent Events).
 
 ### 5. Database
 - **Primary**: MongoDB via Mongoose.
-- **Fallback**: Automatic in-memory storage fallback when MongoDB is unavailable, ensuring zero disruption during local development and testing.
+- **Fallback**: Automatic in-memory database store when MongoDB is unavailable, ensuring zero downtime for local testing.
 
 ### 6. External Services
-- **Google Gemini API**: Synthesizes verified technical insights and analyzes model recommendations.
-- **SerpApi via Python MCP**: Real-time Google Light web search, Google News, and image lookups.
-- **Open Package Registries**: npm Registry API, PyPI JSON API, and crates.io API.
+- **Google Gemini API**: Synthesis and reasoning engine.
+- **SerpApi via Python MCP**: Live search engine queries (Google Light, Google News, Google Images).
+- **Package Registries**: npm Registry, PyPI JSON API, crates.io API.
 - **GitHub REST API**: Release tags, published dates, and changelogs.
 - **AI Provider Catalogs**: Discovery adapters for Google, OpenAI, Anthropic, Mistral, Groq, OpenRouter, Cohere, and Together AI.
-
-### 7. Data Flow
-Raw user intent $\rightarrow$ Orchestrator $\rightarrow$ MCP Tools & Registries $\rightarrow$ Evidence Collector $\rightarrow$ Tier Ranker $\rightarrow$ Citation Validator $\rightarrow$ Gemini Synthesis $\rightarrow$ Persistence $\rightarrow$ SSE Stream to Client.
 
 ---
 
@@ -141,11 +137,11 @@ Raw user intent $\rightarrow$ Orchestrator $\rightarrow$ MCP Tools & Registries 
 | Technology | Purpose |
 | :--- | :--- |
 | **React 18** | Frontend user interface and component architecture |
-| **Vite** | Fast development server and frontend bundling |
+| **Vite** | Development server and production bundling |
 | **TypeScript** | Type safety across frontend, backend, and shared domain models |
 | **Tailwind CSS** | Styling, glassmorphic UI components, and dark theme |
 | **Node.js & Express** | Core API gateway, research orchestration, and provider management |
-| **Google Gemini API** | Grounded reasoning, technical synthesis, and claim evaluation |
+| **Google Gemini API** | Evidence-grounded synthesis, trade-off analysis, and reasoning |
 | **Python 3.10+ & FastAPI** | Model Context Protocol (MCP) server wrapping search tools |
 | **SerpApi** | Live search engine queries (Google Light, Google News, Google Images) |
 | **Mongoose & MongoDB** | Persistence for research reports, model telemetry, and recommendations |
@@ -157,16 +153,16 @@ Raw user intent $\rightarrow$ Orchestrator $\rightarrow$ MCP Tools & Registries 
 ## 📁 Project Structure
 
 ```text
-LensAi/
-├── .env.example                  # Environment variable template
+Library_Lens/
+├── .env.example                  # Environment configuration template
 ├── .gitignore                    # Excluded dependencies, builds, and keys
-├── package.json                  # Root orchestration scripts (concurrent dev runner)
+├── package.json                  # Root orchestration scripts (concurrent runner)
 ├── README.md                     # Project documentation
 │
 ├── frontend/                     # React + Vite + TypeScript Frontend
-│   ├── index.html                # Single-page application root HTML
+│   ├── index.html                # Single-page application HTML entry
 │   ├── package.json              # Frontend dependencies and Vite scripts
-│   ├── tailwind.config.js        # Theme tokens, font definitions, and extensions
+│   ├── tailwind.config.js        # Theme tokens, fonts, and extensions
 │   ├── tsconfig.json             # TypeScript configuration for React
 │   ├── vite.config.ts            # Vite bundler configuration & backend proxy
 │   └── src/
@@ -224,26 +220,26 @@ LensAi/
 - **Node.js**: $\ge$ 18.0.0
 - **Python**: $\ge$ 3.10
 - **npm**: $\ge$ 9.0.0
-- *(Optional)* **MongoDB**: Local daemon or MongoDB Atlas URI (falls back to in-memory store if not installed)
+- *(Optional)* **MongoDB**: Local daemon or MongoDB Atlas URI (falls back to in-memory store if not present)
 
 ---
 
 ### Step 1: Clone Repository & Create Environment File
 
 ```bash
-git clone <repository-url>
-cd LensAi
+git clone https://github.com/SyedAman1907/Library_Lens.git
+cd Library_Lens
 cp .env.example .env
 ```
 
 ---
 
-### Step 2: Install Node.js Dependencies
+### Step 2: Install Node Dependencies
 
 Install all root, backend, and frontend dependencies:
 
 ```bash
-# Using the root convenience script:
+# Using root convenience script:
 npm run install:all
 
 # Or manually:
@@ -255,7 +251,7 @@ cd ..
 
 ---
 
-### Step 3: Setup Python MCP Server Virtual Environment
+### Step 3: Setup Python MCP Virtual Environment
 
 #### On Windows (PowerShell):
 ```powershell
@@ -279,7 +275,7 @@ cd ..
 
 ## 🔐 Environment Variables
 
-Configure the following variables in the root `.env` file. **Never commit actual API keys or credentials to source control.**
+Configure the following variables in the root `.env` file. **Never expose real API keys or tokens in public commits.**
 
 | Variable | Purpose | Required |
 | :--- | :--- | :--- |
@@ -297,7 +293,7 @@ Configure the following variables in the root `.env` file. **Never commit actual
 | `OPENROUTER_API_KEY` | OpenRouter multi-provider discovery adapter | Optional |
 | `COHERE_API_KEY` | Cohere provider discovery adapter | Optional |
 | `TOGETHER_API_KEY` | Together AI provider discovery adapter | Optional |
-| `MODEL_SYNC_INTERVAL_HOURS` | Interval in hours for background model catalog synchronization (default: `6`) | Optional |
+| `MODEL_SYNC_INTERVAL_HOURS` | Interval in hours for background model catalog sync (default: `6`) | Optional |
 | `MAX_MODEL_RESEARCH_CONCURRENCY` | Maximum concurrent background model research jobs (default: `2`) | Optional |
 | `MODEL_FRESH_HOURS` | Freshness evaluation window for model telemetry in hours (default: `24`) | Optional |
 | `MODEL_AGING_HOURS` | Aging threshold before model data is flagged as stale in hours (default: `72`) | Optional |
@@ -316,13 +312,13 @@ From the project root:
 npm run dev
 ```
 
-*This launches the Python MCP server, the Express backend, and the Vite frontend concurrently.*
+*This launches the Python MCP server, the Express backend, and the Vite frontend concurrently using `concurrently`.*
 
 ---
 
 ### Option B: Run Services Individually
 
-If preferred, open three separate terminal windows:
+Open three separate terminals:
 
 **Terminal 1 — Python MCP Server:**
 ```bash
@@ -331,21 +327,21 @@ cd mcp-server
 .\.venv\Scripts\python.exe server.py
 # Linux/macOS:
 source .venv/bin/activate && python server.py
-# Server starts on http://127.0.0.1:5005
+# Running on http://127.0.0.1:5005
 ```
 
 **Terminal 2 — Express Backend:**
 ```bash
 cd backend
 npm run dev
-# Server starts on http://localhost:5000
+# Running on http://localhost:5000
 ```
 
 **Terminal 3 — React Frontend:**
 ```bash
 cd frontend
 npm run dev
-# Application opens at http://localhost:5173
+# Running on http://localhost:5173
 ```
 
 Open `http://localhost:5173` in your browser.
@@ -357,16 +353,16 @@ Open `http://localhost:5173` in your browser.
 ### 1. AI Model Empirical Comparison
 The application features a dedicated side-by-side empirical comparison view:
 
-1. **Navigate to Comparison**: Open the **Model Radar** or **AI Models** view from the sidebar, or trigger **Compare** on any model card.
-2. **Select Model A**: Choose the baseline model from the dropdown (e.g., `[GOOGLE] Gemini 2.5 Flash`).
-3. **Select Model B**: Choose the target model from the second dropdown (e.g., `[GOOGLE] Gemini 2.5 Pro` or any discovered provider model).
+1. **Open Comparison Modal**: Navigate to the **Model Radar** tab or click **Compare** on any model card in the dashboard.
+2. **Select Model A**: Pick the baseline model from the dropdown (e.g., `[GOOGLE] Gemini 2.5 Flash`).
+3. **Select Model B**: Pick the comparison model from the second dropdown (e.g., `[GOOGLE] Gemini 2.5 Pro`).
 4. **Run Empirical Comparison**: The system executes `POST /api/models/compare` with both model identifiers.
 5. **Inspect Side-by-Side Metrics**:
    - **Context Window Ratio**: Displays exact token limits (e.g., `1.0M vs 1.0M`) and calculated ratio (`Ratio: 1.00x`).
    - **Token Pricing**: Compares Input Pricing and Output Pricing per 1M tokens side-by-side.
    - **Capabilities Diff**: Visual breakdown of shared capabilities (e.g., Text, Streaming, Long Context) vs. unique capabilities present exclusively in Model A or Model B.
    - **Evidence Citations**: Compares verified evidence citations retrieved for both models.
-6. **Analyze Model Fit**: Use the telemetry cards and overview descriptions to make informed architectural selections based on verified specs rather than marketing claims.
+6. **Analyze Model Fit**: Use telemetry cards and overview descriptions to make informed architectural selections based on verified specs rather than marketing claims.
 
 ---
 
@@ -375,7 +371,7 @@ The application features a dedicated side-by-side empirical comparison view:
 2. Specify an optional **Use Case** (e.g., `High-frequency state updates in an electron desktop app`).
 3. Click **Research**.
 4. Watch the real-time SSE progress stream gather package metadata, inspect GitHub release tags, run web searches via MCP, and synthesize the grounded report.
-5. Review the objective trade-offs, architecture comparisons, and verified citation badges. Click **Audit / Challenge Claim** on any assertion to verify against primary sources.
+5. Review objective trade-offs, architecture comparisons, and verified citation badges. Click **Audit / Challenge Claim** on any assertion to verify against primary sources.
 
 ---
 
@@ -386,7 +382,7 @@ The application provides objective, empirical comparisons across two major domai
 ### 1. AI Model Comparison Metrics
 - **Context Window Limits & Ratio**: Evaluates maximum context window sizes and computes the numerical scale factor ($Ratio = \frac{\text{Context}_A}{\text{Context}_B}$).
 - **Token Pricing per 1M Tokens**: Evaluates standard input and output token costs based on published provider pricing.
-- **Capabilities Matrix**: Computes the set intersection and set differences:
+- **Capabilities Matrix**: Computes set intersection and set differences:
   - $\text{Shared} = \text{Caps}_A \cap \text{Caps}_B$
   - $\text{Unique to A} = \text{Caps}_A \setminus \text{Caps}_B$
   - $\text{Unique to B} = \text{Caps}_B \setminus \text{Caps}_A$
@@ -403,7 +399,7 @@ The application provides objective, empirical comparisons across two major domai
 
 ## 🏆 Hackathon Value
 
-- **Solves a Universal Problem**: Developers make critical architectural choices using outdated blog posts, biased benchmarks, and hallucinated LLM advice. LibraryLens AI grounds technical decisions in verifiable reality.
+- **Solves a Universal Problem**: Developers make critical architectural choices using outdated blog posts, biased benchmarks, and hallucinated LLM advice. Library Lens grounds technical decisions in verifiable reality.
 - **True Multi-Model & MCP Architecture**: Demonstrates practical adoption of the Model Context Protocol (MCP) to decouple live search tools from core business logic.
 - **Zero Hallucination Tolerance**: Eliminates "black box" claims through programmatic citation validation and interactive claim challenge workflows.
 - **Production-Grade Resilience**: Built with automatic in-memory fallback stores, asynchronous concurrency queues, and real-time streaming interfaces.
@@ -412,11 +408,11 @@ The application provides objective, empirical comparisons across two major domai
 
 ## 🔮 Future Scope
 
-The following capabilities represent planned enhancements not currently implemented in the codebase:
+The following capabilities represent planned enhancements:
 
 - [ ] **Automated Head-to-Head Benchmark Execution**: Running live coding/reasoning prompts against Model A and Model B in real-time to compute empirical latency and token generation rates.
 - [ ] **Self-Hosted LLM Provider Adapters**: Local Ollama and vLLM discovery adapters for air-gapped on-premise model comparisons.
-- [ ] **CI/CD Breaking Change Linter**: GitHub Action to audit dependencies in pull requests against LibraryLens breaking change radar.
+- [ ] **CI/CD Breaking Change Linter**: GitHub Action to audit dependencies in pull requests against Library Lens breaking change radar.
 - [ ] **Collaborative Workspace Teams**: Multi-user shared research collections and team-wide architectural decision records (ADRs).
 
 ---
@@ -441,15 +437,13 @@ The following capabilities represent planned enhancements not currently implemen
 
 ## 🎥 Demo
 
-- **Demo Video**: *[Link to 2-3 minute presentation video]*
-- **Live Deployment**: *[Link to live deployed web application]*
-- **GitHub Repository**: *[Link to official GitHub repository]*
+- **Demo Video**: *[Link to presentation video]*
+- **Live Deployment**: *[Link to live web application]*
+- **GitHub Repository**: [https://github.com/SyedAman1907/Library_Lens](https://github.com/SyedAman1907/Library_Lens)
 
 ---
 
 ## 📸 Screenshots
-
-*(Add visual representations of the application below)*
 
 | AI Model Empirical Comparison | Model Discovery Radar |
 | :---: | :---: |
@@ -463,8 +457,8 @@ The following capabilities represent planned enhancements not currently implemen
 
 ## 👥 Team
 
-- **Developer / Project Lead**: *[Your Name / GitHub Profile]*
-- **Role**: Full-Stack Architecture, MCP Tooling, AI Integration
+- **Developer / Project Lead**: Syed Aman
+- **Repository**: [https://github.com/SyedAman1907/Library_Lens](https://github.com/SyedAman1907/Library_Lens)
 
 ---
 
@@ -476,6 +470,4 @@ This project is licensed under the [MIT License](package.json).
 
 ## ⭐ Final Section
 
-**LibraryLens AI brings empirical rigor to AI-assisted software engineering — transforming generative AI from an unreliable memory bank into a verifiable, evidence-grounded research partner.**
-#   L i b r a r y _ L e n s  
- 
+**Library Lens brings empirical rigor to AI-assisted software engineering — transforming generative AI from an unreliable memory bank into a verifiable, evidence-grounded research partner.**
