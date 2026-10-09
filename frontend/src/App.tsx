@@ -20,6 +20,7 @@ import { useTheme } from './hooks/useTheme';
 import { EvidenceGraph } from './components/EvidenceGraph';
 import { BreakingChangeRadar } from './components/BreakingChangeRadar';
 import { ModelCompareModal } from './components/ModelCompareModal';
+import { ModelComparisonView } from './components/ModelComparisonView';
 import { ClaimChallengeModal } from './components/ClaimChallengeModal';
 import {
   submitResearch,
@@ -51,6 +52,7 @@ export function App() {
   // Navigation & View state - default to overview homepage
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
@@ -357,6 +359,7 @@ export function App() {
         activeResearchTitle={
           research ? `${research.libraryA} vs ${research.libraryB}` : undefined
         }
+        onToggleMobileMenu={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
         systemStatus={
           systemHealth
             ? {
@@ -385,6 +388,8 @@ export function App() {
           onNewResearch={handleResetToHero}
           theme={theme}
           onToggleTheme={toggleTheme}
+          isMobileOpen={isMobileDrawerOpen}
+          onCloseMobile={() => setIsMobileDrawerOpen(false)}
           systemStatus={
             systemHealth
               ? {
@@ -488,7 +493,9 @@ export function App() {
                   }}
                   onCompareModels={(mA, mB) => {
                     setCompareModalModels({ a: mA, b: mB });
+                    setActiveTab('comparisons');
                   }}
+                  onNavigateToComparisons={() => setActiveTab('comparisons')}
                 />
               </div>
             )}
@@ -513,6 +520,11 @@ export function App() {
                     onSelectSource={(source) => setSelectedSource(source)}
                     isSaved={isCurrentReportSaved}
                     onToggleSave={() => handleToggleSaveReport(research)}
+                    onNavigateToRecommendations={(req) => {
+                      if (req) setRecommendationPrompt(req);
+                      setActiveTab('recommendations');
+                    }}
+                    onNavigateToComparisons={() => setActiveTab('comparisons')}
                   />
                 ) : (
                   <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
@@ -528,7 +540,9 @@ export function App() {
                       }}
                       onCompareModels={(mA, mB) => {
                         setCompareModalModels({ a: mA, b: mB });
+                        setActiveTab('comparisons');
                       }}
+                      onNavigateToComparisons={() => setActiveTab('comparisons')}
                     />
                   </div>
                 )}
@@ -542,7 +556,19 @@ export function App() {
                   onNavigateToRadar={() => setActiveTab('models')}
                   onSelectModel={(m) => {
                     setCompareModalModels({ a: m.id });
+                    setActiveTab('comparisons');
                   }}
+                />
+              </div>
+            )}
+
+            {activeTab === 'comparisons' && (
+              <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
+                <ModelComparisonView
+                  allModels={allModels}
+                  initialModelA={compareModalModels?.a || 'google:gemini-2.5-flash'}
+                  initialModelB={compareModalModels?.b || 'anthropic:claude-3.5-sonnet'}
+                  onSelectSource={(source) => setSelectedSource(source)}
                 />
               </div>
             )}

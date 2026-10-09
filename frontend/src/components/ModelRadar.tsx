@@ -176,24 +176,24 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* Top Switcher Bar */}
-      <div className="flex items-center justify-between p-1 rounded-xl bg-[#F8F8FA] dark:bg-white/[0.04] border border-[#E5E7EB] dark:border-white/[0.08] max-w-sm shadow-xs">
+      <div className="flex items-center justify-between p-1 rounded-xl bg-[#FFFDF9] dark:bg-white/[0.04] border border-[#F0DED7] dark:border-white/[0.08] max-w-sm shadow-xs">
         <button
           onClick={() => setViewMode('recommendations')}
           className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             viewMode === 'recommendations'
-              ? 'bg-white dark:bg-violet-600 text-[#6D4AFF] dark:text-white shadow-xs border border-[#E5E7EB] dark:border-transparent font-bold'
-              : 'text-[#52525B] dark:text-[#A1A1AA] hover:text-[#111114] dark:hover:text-white'
+              ? 'bg-white dark:bg-[#141010] text-[#EC4899] shadow-xs border border-[#FCE7F3] dark:border-transparent font-bold'
+              : 'text-[#52525B] dark:text-[#A1A1AA] hover:text-[#241414] dark:hover:text-white'
           }`}
         >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>AI Recommender</span>
+          <Sparkles className="w-3.5 h-3.5 text-[#EC4899]" />
+          <span>✦ AI Recommender</span>
         </button>
         <button
           onClick={() => setViewMode('radar')}
           className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
             viewMode === 'radar'
-              ? 'bg-white dark:bg-violet-600 text-[#6D4AFF] dark:text-white shadow-xs border border-[#E5E7EB] dark:border-transparent font-bold'
-              : 'text-[#52525B] dark:text-[#A1A1AA] hover:text-[#111114] dark:hover:text-white'
+              ? 'bg-[#E63946] text-white shadow-xs font-bold'
+              : 'text-[#52525B] dark:text-[#A1A1AA] hover:text-[#241414] dark:hover:text-white'
           }`}
         >
           <Radio className="w-3.5 h-3.5" />
@@ -206,23 +206,21 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
       ) : (
         <>
           {/* Header & Dashboard Stats Bar */}
-          <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#0C0C0F] border border-[#E5E7EB] dark:border-white/10 shadow-[0_8px_30px_rgba(15,23,42,0.05)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#6D4AFF]/[0.03] dark:bg-violet-600/10 blur-[100px] pointer-events-none rounded-full" />
-
+          <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#100D0D] border border-[#F0DED7] dark:border-white/10 shadow-[0_8px_30px_rgba(36,20,20,0.04)] relative overflow-hidden">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-[#F0EBFF] dark:bg-violet-500/10 border border-[#DDD3FF] dark:border-violet-500/20 text-[#6941D9] dark:text-violet-400 text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                <Radio className="w-3 h-3 text-[#6941D9] dark:text-violet-400 animate-pulse" />
+              <span className="px-2.5 py-0.5 rounded-full bg-[#FFF1F2] dark:bg-red-500/10 border border-[#FECDD3] dark:border-red-500/20 text-[#E63946] dark:text-red-400 text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                <Radio className="w-3 h-3 text-[#E63946] animate-pulse" />
                 Live Multi-Provider Discovery
               </span>
               {stats?.lastSynchronizedAt && (
-                <span className="text-xs text-[#71717A] flex items-center gap-1">
+                <span className="text-xs text-[#71717A] flex items-center gap-1 font-mono">
                   ● Last sync: {new Date(stats.lastSynchronizedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
               )}
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#111114] dark:text-white flex items-center gap-3 font-display">
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#241414] dark:text-white flex items-center gap-3 font-display">
               Stay ahead of new models.
             </h1>
             <p className="text-sm text-[#52525B] dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
@@ -237,16 +235,16 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
                 setCompareModelB(models[1]?.id || '');
                 setCompareModalOpen(true);
               }}
-              className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#F8F8FA] dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-[#D9DCE3] dark:border-white/10 text-xs font-semibold text-[#111114] dark:text-zinc-200 transition-colors flex items-center gap-2 shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#FDF9F7] dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-[#F0DED7] dark:border-white/10 text-xs font-semibold text-[#241414] dark:text-zinc-200 transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
             >
-              <ArrowRightLeft className="w-4 h-4 text-[#6D4AFF]" />
+              <ArrowRightLeft className="w-4 h-4 text-[#E63946]" />
               Compare Models
             </button>
 
             <button
               onClick={handleTriggerSync}
               disabled={isSyncing}
-              className="px-4 py-2.5 rounded-xl bg-[#6D4AFF] hover:bg-[#5B3FD6] text-xs font-semibold text-white transition-colors flex items-center gap-2 shadow-md shadow-[#6D4AFF]/20 disabled:opacity-50"
+              className="btn-primary-red px-4 py-2.5 rounded-xl text-xs font-semibold text-white transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50 cursor-pointer"
             >
               <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin' : ''}`} />
               {isSyncing ? 'Synchronizing...' : 'Refresh Models'}
@@ -289,9 +287,9 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <span className="text-2xl font-black text-blue-700 dark:text-blue-400 font-mono">{stats?.updatedCount ?? 0}</span>
           </div>
 
-          <div className="p-3 bg-[#F7F5FF] dark:bg-violet-950/20 border border-[#DDD3FF] dark:border-violet-500/20 rounded-xl">
-            <span className="text-xs text-[#6D4AFF] dark:text-violet-400 font-medium block">Active</span>
-            <span className="text-2xl font-black text-[#6D4AFF] dark:text-violet-400 font-mono">{stats?.activeCount ?? models.length}</span>
+          <div className="p-3 bg-[#FFF1F2] dark:bg-red-950/20 border border-[#FECDD3] dark:border-red-500/20 rounded-xl">
+            <span className="text-xs text-[#E63946] dark:text-red-400 font-medium block">Active</span>
+            <span className="text-2xl font-black text-[#E63946] dark:text-red-400 font-mono">{stats?.activeCount ?? models.length}</span>
           </div>
 
           <div className="p-3 bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-500/20 rounded-xl">
@@ -299,16 +297,16 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <span className="text-2xl font-black text-rose-700 dark:text-rose-400 font-mono">{stats?.deprecatedCount ?? 0}</span>
           </div>
 
-          <div className="p-3 bg-[#FAFAFC] dark:bg-white/[0.02] border border-[#E5E7EB] dark:border-white/5 rounded-xl">
+          <div className="p-3 bg-[#FAFAFC] dark:bg-white/[0.02] border border-[#F0DED7] dark:border-white/5 rounded-xl">
             <span className="text-xs text-[#71717A] block font-medium">Researched</span>
-            <span className="text-2xl font-black text-[#111114] dark:text-white font-mono">
+            <span className="text-2xl font-black text-[#241414] dark:text-white font-mono">
               {stats?.recentlyResearchedCount ?? models.filter(m => m.researchStatus === 'completed').length}
             </span>
           </div>
         </div>
 
         {/* Live Provider Health Bar */}
-        <div className="mt-6 pt-4 border-t border-[#E5E7EB] dark:border-white/5 flex items-center justify-between flex-wrap gap-3 text-xs">
+        <div className="mt-6 pt-4 border-t border-[#F0DED7] dark:border-white/5 flex items-center justify-between flex-wrap gap-3 text-xs">
           <span className="text-[#71717A] font-semibold uppercase tracking-wider text-[10px]">
             Provider Connections:
           </span>
@@ -333,7 +331,7 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
                       ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20'
                       : isErr
                       ? 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20'
-                      : 'bg-[#FAFAFC] text-[#71717A] border-[#E5E7EB] dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700'
+                      : 'bg-[#FFFDF9] text-[#71717A] border-[#F0DED7] dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700'
                   }`}
                   title={p.errorMessage || (isConn ? 'Connected & operational' : 'API key not configured')}
                 >
@@ -354,11 +352,11 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Category Tabs */}
-          <div className="flex items-center gap-1 p-1 bg-[#F8F8FA] dark:bg-zinc-900 border border-[#E5E7EB] dark:border-white/10 rounded-xl overflow-x-auto text-xs font-medium">
+          <div className="flex items-center gap-1 p-1 bg-[#FFFDF9] dark:bg-zinc-900 border border-[#F0DED7] dark:border-white/10 rounded-xl overflow-x-auto text-xs font-medium">
             <button
               onClick={() => setActiveTab('all')}
               className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                activeTab === 'all' ? 'bg-[#6D4AFF] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#111114] dark:hover:text-white'
+                activeTab === 'all' ? 'bg-[#E63946] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#241414] dark:hover:text-white'
               }`}
             >
               All Models ({models.length})
@@ -366,7 +364,7 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <button
               onClick={() => setActiveTab('new')}
               className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                activeTab === 'new' ? 'bg-[#6D4AFF] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#111114] dark:hover:text-white'
+                activeTab === 'new' ? 'bg-[#E63946] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#241414] dark:hover:text-white'
               }`}
             >
               New ({stats?.newCount ?? 0})
@@ -374,7 +372,7 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <button
               onClick={() => setActiveTab('updated')}
               className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                activeTab === 'updated' ? 'bg-[#6D4AFF] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#111114] dark:hover:text-white'
+                activeTab === 'updated' ? 'bg-[#E63946] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#241414] dark:hover:text-white'
               }`}
             >
               Updated ({stats?.updatedCount ?? 0})
@@ -382,7 +380,7 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <button
               onClick={() => setActiveTab('active')}
               className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                activeTab === 'active' ? 'bg-[#6D4AFF] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#111114] dark:hover:text-white'
+                activeTab === 'active' ? 'bg-[#E63946] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#241414] dark:hover:text-white'
               }`}
             >
               Active
@@ -390,7 +388,7 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <button
               onClick={() => setActiveTab('deprecated')}
               className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                activeTab === 'deprecated' ? 'bg-[#6D4AFF] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#111114] dark:hover:text-white'
+                activeTab === 'deprecated' ? 'bg-[#E63946] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#241414] dark:hover:text-white'
               }`}
             >
               Deprecated
@@ -398,7 +396,7 @@ export const ModelRadar: React.FC<ModelRadarProps> = ({ onSelectModel, initialMo
             <button
               onClick={() => setActiveTab('researched')}
               className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap ${
-                activeTab === 'researched' ? 'bg-[#6D4AFF] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#111114] dark:hover:text-white'
+                activeTab === 'researched' ? 'bg-[#E63946] text-white font-semibold shadow-xs' : 'text-[#52525B] dark:text-zinc-400 hover:text-[#241414] dark:hover:text-white'
               }`}
             >
               Researched

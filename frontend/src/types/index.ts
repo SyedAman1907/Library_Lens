@@ -522,9 +522,121 @@ export interface ModelSyncProgress {
   error?: string;
 }
 
+export interface ModelComparisonRelease {
+  model: string;
+  version: string;
+  date: string;
+  notes: string;
+  url?: string;
+}
+
+export interface ModelComparisonRecommendation {
+  recommendedModel: string | null;
+  recommendedModelId: string | null;
+  isBothViable: boolean;
+  title: string;
+  why: string[];
+  tradeoff: string;
+  viableFactors?: string[];
+  confidence: 'HIGH' | 'MEDIUM' | 'LIMITED';
+}
+
+export interface ModelComparisonSource {
+  id: string;
+  title: string;
+  url: string;
+  sourceType: string;
+  publisher: string;
+  tier: number;
+  retrievedAt: string;
+  snippet?: string;
+}
+
+export interface ModelComparisonEvidence {
+  id: string;
+  claim: string;
+  verified: boolean;
+  verificationState: 'VERIFIED' | 'PARTIALLY VERIFIED' | 'UNVERIFIED' | 'CONFLICTING EVIDENCE';
+  sourceIds: string[];
+  model: string;
+}
+
 export interface ModelComparisonResult {
   modelA: AiModelRecord;
   modelB: AiModelRecord;
+  lastResearchedAt?: string;
+  requirements?: string;
+  overview?: {
+    modelA: string;
+    modelB: string;
+    summary: string;
+  };
+  capabilities?: {
+    shared: string[];
+    onlyInA: string[];
+    onlyInB: string[];
+  };
+  context?: {
+    contextA: number | null;
+    contextB: number | null;
+    maxOutputA: number | null;
+    maxOutputB: number | null;
+    ratio: string | null;
+    analysis: string;
+  };
+  pricing?: {
+    inputA: number | null;
+    inputB: number | null;
+    outputA: number | null;
+    outputB: number | null;
+    analysis: string;
+  };
+  performance?: {
+    latencyA: string;
+    latencyB: string;
+    throughputA: string;
+    throughputB: string;
+    analysis: string;
+  };
+  toolCalling?: {
+    modelA: string;
+    modelB: string;
+    supportedA: boolean;
+    supportedB: boolean;
+    analysis: string;
+  };
+  vision?: {
+    modelA: string;
+    modelB: string;
+    supportedA: boolean;
+    supportedB: boolean;
+    analysis: string;
+  };
+  coding?: {
+    modelA: string;
+    modelB: string;
+    analysis: string;
+  };
+  availability?: {
+    modelA: string;
+    modelB: string;
+    analysis: string;
+  };
+  ecosystem?: {
+    modelA: string;
+    modelB: string;
+    analysis: string;
+  };
+  releases?: ModelComparisonRelease[];
+  tradeoffs?: {
+    whenToChooseA: string[];
+    whenToChooseB: string[];
+    summary: string;
+  };
+  recommendation?: ModelComparisonRecommendation;
+  evidence?: ModelComparisonEvidence[];
+  sources?: ModelComparisonSource[];
+  // Backwards compatibility for previous simple UI
   comparison: {
     contextRatio: string | null;
     sharedCapabilities: string[];

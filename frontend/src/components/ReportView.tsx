@@ -62,6 +62,8 @@ interface ReportViewProps {
   onSelectSource: (source: Source) => void;
   isSaved?: boolean;
   onToggleSave?: () => void;
+  onNavigateToRecommendations?: (req?: string) => void;
+  onNavigateToComparisons?: () => void;
 }
 
 export const ReportView: React.FC<ReportViewProps> = ({
@@ -71,6 +73,8 @@ export const ReportView: React.FC<ReportViewProps> = ({
   onSelectSource,
   isSaved = false,
   onToggleSave,
+  onNavigateToRecommendations,
+  onNavigateToComparisons,
 }) => {
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
@@ -350,6 +354,138 @@ export const ReportView: React.FC<ReportViewProps> = ({
               <div className="text-[10px] text-[#71717A] font-mono">Multi-source run</div>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* =================================================================
+          REQUIREMENT 13, 14, 15: HERO LIBRARYLENS RECOMMENDATION CARD
+         ================================================================= */}
+      <div className="rounded-2xl border-2 border-[#D4A017] dark:border-[#D4A017]/70 bg-white dark:bg-[#100D0D] p-6 sm:p-7 shadow-[0_8px_30px_rgba(212,160,23,0.12)] relative overflow-hidden space-y-6">
+        <div className="signature-accent-bar absolute top-0 left-0 right-0 h-1.5" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#F0DED7] dark:border-white/[0.08] pt-1">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEFCE8] text-[#92400E] border border-[#FDE047] text-xs font-mono font-extrabold shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4A017]" />
+              <span>✦ LIBRARYLENS PICK</span>
+            </span>
+            <span className="text-xs font-mono font-semibold text-[#E63946] dark:text-red-400">
+              PRIMARY RECOMMENDATION
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs font-mono">
+            <span className="text-[#71717A] uppercase">Evidence Confidence:</span>
+            <span className="font-bold text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20">
+              {verifiedClaimsCount >= 2 ? 'HIGH' : 'MEDIUM'}
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+          <div className="space-y-3">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-[#71717A] font-semibold block">
+                Best fit for your requirements
+              </span>
+              <h2 className="text-3xl font-extrabold font-display text-[#241414] dark:text-white mt-1">
+                {libraryA}
+              </h2>
+            </div>
+
+            <p className="text-sm text-[#52525B] dark:text-[#D4D4D8] leading-relaxed">
+              Strong empirical fit for {useCase ? `"${useCase}"` : 'your architecture constraints'}. Documented primary sources confirm stability, active maintenance, and runtime ecosystem alignment.
+            </p>
+
+            <div className="grid grid-cols-2 gap-2 pt-2 text-xs font-medium text-[#241414] dark:text-[#E4E4E7]">
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Ecosystem ({report.versionData?.libraryA?.ecosystem || 'Active'})</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Documentation ({officialSourcesCount} Tier-1 docs)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Feature Fit (v{report.versionData?.libraryA?.currentVersion || 'Current'})</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Migration Considerations</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              <button
+                type="button"
+                onClick={() => {
+                  const evEl = document.getElementById('evidence');
+                  if (evEl) evEl.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn-primary-red flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>View Evidence</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (onNavigateToComparisons) {
+                    onNavigateToComparisons();
+                  } else {
+                    const sec = document.getElementById('features');
+                    if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-white/[0.05] hover:bg-[#F8F8FA] dark:hover:bg-white/[0.1] text-[#111114] dark:text-white border border-[#D9DCE3] dark:border-white/[0.1] transition-all cursor-pointer"
+              >
+                <ArrowRightLeft className="w-3.5 h-3.5 text-[#71717A]" />
+                <span>Compare Alternatives</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Section 15: Recommendation Reasoning Flow */}
+          <div className="p-4 rounded-xl bg-white dark:bg-[#111114] border border-[#E9E3FF] dark:border-violet-500/20 shadow-xs space-y-3">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[#6D4AFF] dark:text-violet-300 font-bold block">
+              Why this recommendation? (Chain of Evidence)
+            </span>
+
+            <div className="relative pl-4 space-y-2.5 border-l-2 border-[#DDD3FF] dark:border-violet-500/30 ml-1 text-xs">
+              <div className="relative">
+                <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#6D4AFF]" />
+                <span className="text-[9px] font-mono text-[#71717A] uppercase font-bold block">Your Requirement</span>
+                <span className="font-semibold text-[#111114] dark:text-white">
+                  {useCase || 'Production application architecture'}
+                </span>
+              </div>
+
+              <div className="relative">
+                <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#8B72FF]" />
+                <span className="text-[9px] font-mono text-[#71717A] uppercase font-bold block">Evidence</span>
+                <span className="text-[#52525B] dark:text-[#A1A1AA]">
+                  {evidence[0]?.claim || `Documented support with ${verifiedClaimsCount} verified claims across primary documentation.`}
+                </span>
+              </div>
+
+              <div className="relative">
+                <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-blue-500" />
+                <span className="text-[9px] font-mono text-[#71717A] uppercase font-bold block">Relevance</span>
+                <span className="text-[#52525B] dark:text-[#A1A1AA]">
+                  Directly satisfies stated development requirements and ecosystem expectations.
+                </span>
+              </div>
+
+              <div className="relative">
+                <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-[9px] font-mono text-[#71717A] uppercase font-bold block">Recommendation</span>
+                <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                  {libraryA} is primary recommended fit for this architecture.
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -900,9 +1036,14 @@ export const ReportView: React.FC<ReportViewProps> = ({
               Interactive Evidence Graph
             </h2>
           </div>
-          <span className="text-[11px] font-mono text-[#71717A]">
-            CLAIM → EVIDENCE → SOURCE
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#FAF8FF] dark:bg-violet-950/30 border border-[#DDD3FF] dark:border-violet-500/20 text-[#6D4AFF] dark:text-violet-300 font-mono text-[10px] font-bold">
+              ✦ NO SOURCE = NO FACT
+            </span>
+            <span className="text-[11px] font-mono text-[#71717A]">
+              CLAIM → EVIDENCE → SOURCE
+            </span>
+          </div>
         </div>
 
         <EvidenceGraph

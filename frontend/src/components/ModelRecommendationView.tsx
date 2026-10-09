@@ -294,11 +294,11 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
               onClick={() => setShowConstraints(!showConstraints)}
               className={`flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                 showConstraints || Object.keys(customConstraints).length > 0
-                  ? 'bg-[#F2EEFF] text-[#5B3FD6] border-[#DDD3FF]'
-                  : 'bg-white dark:bg-white/[0.04] border-[#D9DCE3] dark:border-white/[0.08] text-[#52525B] dark:text-[#A1A1AA] hover:bg-[#F8F8FA] hover:text-[#111114]'
+                  ? 'bg-[#FFF1F2] text-[#E63946] border-[#FECDD3]'
+                  : 'bg-white dark:bg-white/[0.04] border-[#F0DED7] dark:border-white/[0.08] text-[#52525B] dark:text-[#A1A1AA] hover:bg-[#FFFDF9] hover:text-[#241414]'
               }`}
             >
-              <Sliders className="w-4 h-4 text-[#6D4AFF]" />
+              <Sliders className="w-4 h-4 text-[#E63946]" />
               <span>Advanced Tuning</span>
               {showConstraints ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
             </button>
@@ -306,7 +306,7 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
             <button
               onClick={() => handleAnalyze()}
               disabled={loading || !prompt.trim()}
-              className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold bg-[#6D4AFF] hover:bg-[#5B3FD6] text-white shadow-sm transition-all cursor-pointer disabled:opacity-50"
+              className="btn-primary-red flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -316,7 +316,7 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" />
-                  <span>Research & Recommend</span>
+                  <span>✦ Research & Recommend</span>
                 </>
               )}
             </button>
@@ -324,7 +324,7 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
         </div>
 
         {/* SECTION 25: YOUR REQUIREMENTS CHIPS */}
-        <div className="pt-2 border-t border-[#E5E7EB] dark:border-white/[0.06] space-y-2">
+        <div className="pt-2 border-t border-[#F0DED7] dark:border-white/[0.06] space-y-2">
           <span className="text-[11px] font-mono text-[#71717A] uppercase tracking-wider block font-semibold">
             Your Requirements
           </span>
@@ -361,8 +361,8 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#F2EEFF] text-[#5B3FD6] border border-[#DDD3FF] font-semibold shadow-sm'
-                      : 'bg-[#F8F8FA] dark:bg-white/[0.04] text-[#52525B] dark:text-[#A1A1AA] hover:bg-[#F1F1F5] hover:text-[#111114] border border-[#E5E7EB] dark:border-white/[0.06]'
+                      ? 'bg-[#FFF1F2] text-[#E63946] border border-[#FECDD3] font-semibold shadow-xs'
+                      : 'bg-[#FFFDF9] dark:bg-white/[0.04] text-[#52525B] dark:text-[#A1A1AA] hover:bg-[#FDF9F7] hover:text-[#241414] border border-[#F0DED7] dark:border-white/[0.06]'
                   }`}
                 >
                   {isSelected ? '✓ ' : '+ '}
@@ -623,25 +623,41 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
             </div>
           </div>
 
-          {/* CANDIDATE MODEL CARDS (Multiple suitable options, no forced single pick) */}
+          {/* CANDIDATE MODEL CARDS (Top option is ✦ LIBRARYLENS PICK) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {analysis.recommendations.map((rec, rIdx) => {
               const model = rec.model;
               const isExpanded = expandedModelId === model.id;
+              const isHeroPick = rIdx === 0;
 
               return (
                 <div
                   key={model.id}
-                  className="rounded-2xl border border-[#E5E7EB] dark:border-white/[0.07] bg-white dark:bg-[#0C0C0F] hover:border-[#6D4AFF]/40 transition-all shadow-[0_4px_20px_rgba(15,23,42,0.04)] hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] overflow-hidden flex flex-col justify-between group"
+                  className={`rounded-2xl transition-all overflow-hidden flex flex-col justify-between group relative ${
+                    isHeroPick
+                      ? 'border-2 border-[#D4A017] dark:border-[#D4A017]/70 bg-white dark:bg-[#100D0D] shadow-[0_8px_30px_rgba(212,160,23,0.12)]'
+                      : 'border border-[#F0DED7] dark:border-white/[0.07] bg-white dark:bg-[#100D0D] hover:border-[#FECDD3] shadow-subtle hover:shadow-md'
+                  }`}
                 >
+                  {isHeroPick && (
+                    <div className="signature-accent-bar absolute top-0 left-0 right-0 h-1.5" />
+                  )}
+
                   <div className="p-6 space-y-6">
-                    {/* Top Row: RECOMMENDED Badge, Provider, Name */}
+                    {/* Top Row: PICK Badge, Provider, Fresh Evidence */}
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-[#F0EBFF] text-[#6941D9] border border-[#DDD3FF] font-bold">
-                            {rIdx === 0 ? 'RECOMMENDED • TOP FIT' : 'RECOMMENDED OPTION'}
-                          </span>
+                          {isHeroPick ? (
+                            <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#FEFCE8] text-[#92400E] border border-[#FDE047] font-extrabold flex items-center gap-1">
+                              <Sparkles className="w-3 h-3 text-[#D4A017]" />
+                              ✦ LIBRARYLENS PICK
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-[#FFF1F2] text-[#E63946] border border-[#FECDD3] font-bold">
+                              RECOMMENDED OPTION
+                            </span>
+                          )}
                           <span className="text-[10px] font-mono text-[#71717A] uppercase font-semibold">
                             {model.provider}
                           </span>
@@ -653,20 +669,22 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                       </div>
 
                       <div>
-                        <h3 className="text-xl font-bold text-[#111114] dark:text-white font-display group-hover:text-[#6D4AFF] transition-colors">
+                        <h3 className={`text-xl font-bold font-display transition-colors ${
+                          isHeroPick ? 'text-[#241414] dark:text-white group-hover:text-[#D4A017]' : 'text-[#241414] dark:text-white group-hover:text-[#E63946]'
+                        }`}>
                           {model.displayName}
                         </h3>
-                        <p className="text-xs text-[#71717A] dark:text-[#A1A1AA] mt-1">
+                        <p className="text-xs text-[#71717A] dark:text-[#A1A1AA] mt-1 leading-relaxed">
                           Strong verified fit for your {analysis.detectedRequirements.useCase.toLowerCase()} requirements.
                         </p>
                       </div>
                     </div>
 
                     {/* SPECS GRID: Context, Cost, Coding, Tools */}
-                    <div className="grid grid-cols-4 gap-2 p-3 rounded-xl bg-[#FAFAFC] dark:bg-[#111114] border border-[#E5E7EB] dark:border-white/[0.05] text-center text-xs">
+                    <div className="grid grid-cols-4 gap-2 p-3 rounded-xl bg-[#FFFDF9] dark:bg-[#141010] border border-[#F0DED7] dark:border-white/[0.05] text-center text-xs">
                       <div>
                         <span className="text-[10px] font-mono text-[#71717A] uppercase block">Context</span>
-                        <span className="font-semibold text-[#111114] dark:text-white font-mono mt-0.5 block">
+                        <span className="font-semibold text-[#241414] dark:text-white font-mono mt-0.5 block">
                           {model.contextWindow ? (model.contextWindow >= 1000000 ? `${(model.contextWindow / 1000000).toFixed(0)}M` : `${Math.round(model.contextWindow / 1000)}k`) : '128k'}
                         </span>
                       </div>
@@ -678,13 +696,13 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                       </div>
                       <div>
                         <span className="text-[10px] font-mono text-[#71717A] uppercase block">Coding</span>
-                        <span className="font-semibold text-[#6D4AFF] font-mono mt-0.5 block">
+                        <span className="font-semibold text-[#E63946] font-mono mt-0.5 block">
                           {model.capabilities.includes('Code') || model.modelId.includes('code') ? '✓ Yes' : 'Standard'}
                         </span>
                       </div>
                       <div>
                         <span className="text-[10px] font-mono text-[#71717A] uppercase block">Tools</span>
-                        <span className="font-semibold text-[#6D4AFF] font-mono mt-0.5 block">
+                        <span className="font-semibold text-[#EC4899] font-mono mt-0.5 block">
                           {model.capabilities.includes('Tool Calling') || model.capabilities.includes('Function Calling') ? '✓ Yes' : 'Prompt'}
                         </span>
                       </div>
@@ -695,7 +713,7 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                       <span className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] dark:text-[#A1A1AA] font-bold block">
                         Why this fits your requirements
                       </span>
-                      <ul className="space-y-1.5 text-xs text-[#111114] dark:text-[#D4D4D8]">
+                      <ul className="space-y-1.5 text-xs text-[#241414] dark:text-[#D4D4D8]">
                         {rec.whyItFits.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
@@ -706,27 +724,27 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                     </div>
 
                     {/* VERTICAL EVIDENCE TRAIL (Visual Hierarchy of Trust) */}
-                    <div className="p-4 rounded-xl bg-[#F7F5FF] dark:bg-violet-950/20 border border-[#DDD3FF] dark:border-violet-500/15 space-y-3">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#6D4AFF] font-bold block">
+                    <div className="p-4 rounded-xl bg-[#FFFDF9] dark:bg-[#141010] border border-[#F0DED7] dark:border-white/[0.08] space-y-3">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#E63946] font-bold block">
                         Why this fits your requirements (Evidence Trail)
                       </span>
-                      <div className="relative pl-4 space-y-3 border-l-2 border-[#C9BEFF] dark:border-violet-500/30 ml-1">
+                      <div className="relative pl-4 space-y-3 border-l-2 border-[#FECDD3] dark:border-red-500/30 ml-1">
                         <div className="relative">
-                          <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#6D4AFF]" />
+                          <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#E63946]" />
                           <span className="text-[10px] font-mono text-[#71717A] uppercase block font-semibold">YOUR REQUIREMENT</span>
-                          <span className="text-xs font-semibold text-[#111114] dark:text-white">
+                          <span className="text-xs font-semibold text-[#241414] dark:text-white">
                             {analysis.detectedRequirements.useCase || 'AI Application Architecture'}
                           </span>
                         </div>
                         <div className="relative">
-                          <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#7C5CFF]" />
+                          <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#EC4899]" />
                           <span className="text-[10px] font-mono text-[#71717A] uppercase block font-semibold">DOCUMENTED EVIDENCE</span>
                           <span className="text-xs text-[#52525B] dark:text-[#D4D4D8]">
                             {rec.evidenceList?.[0]?.sourceTitle || `Official documentation & API references by ${model.provider}`}
                           </span>
                         </div>
                         <div className="relative">
-                          <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-blue-500" />
+                          <span className="absolute -left-[21px] top-1 w-2 h-2 rounded-full bg-[#D4A017]" />
                           <span className="text-[10px] font-mono text-[#71717A] uppercase block font-semibold">VERIFIED FACT</span>
                           <span className="text-xs text-[#52525B] dark:text-[#D4D4D8]">
                             {rec.evidenceList?.[0]?.evidenceClaim || `${model.displayName} features context of ${model.contextWindow ? model.contextWindow.toLocaleString() : '128,000'} tokens with native execution capability.`}
@@ -747,7 +765,7 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                       <span className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] dark:text-[#A1A1AA] font-bold block">
                         Trade-offs to consider
                       </span>
-                      <div className="p-3 rounded-xl bg-[#FAFAFC] dark:bg-[#111114] border border-[#E5E7EB] dark:border-white/[0.05] space-y-1.5 text-xs">
+                      <div className="p-3 rounded-xl bg-[#FFFDF9] dark:bg-[#141010] border border-[#F0DED7] dark:border-white/[0.05] space-y-1.5 text-xs">
                         <div className="flex items-start gap-2 text-emerald-700 dark:text-emerald-400">
                           <span className="font-bold">+</span>
                           <span>Strong verified context and reasoning performance</span>
@@ -763,14 +781,14 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
 
                     {/* STRUCTURED REQUIREMENT EXPLANATIONS (Expandable) */}
                     {isExpanded && rec.requirementExplanations.length > 0 && (
-                      <div className="pt-3 border-t border-[#E5E7EB] dark:border-white/[0.06] space-y-3 animate-fadeIn">
-                        <span className="text-[11px] font-mono uppercase tracking-wider text-[#6D4AFF] font-semibold block">
+                      <div className="pt-3 border-t border-[#F0DED7] dark:border-white/[0.06] space-y-3 animate-fadeIn">
+                        <span className="text-[11px] font-mono uppercase tracking-wider text-[#E63946] font-semibold block">
                           Requirement Breakdown & Evidence
                         </span>
                         {rec.requirementExplanations.map((exp, idx) => (
-                          <div key={idx} className="p-3 rounded-lg bg-[#FAFAFC] dark:bg-white/[0.02] border border-[#E5E7EB] dark:border-white/[0.05] space-y-1.5 text-xs">
+                          <div key={idx} className="p-3 rounded-lg bg-[#FFFDF9] dark:bg-white/[0.02] border border-[#F0DED7] dark:border-white/[0.05] space-y-1.5 text-xs">
                             <div className="flex items-center justify-between text-[11px]">
-                              <span className="font-semibold text-[#111114] dark:text-white">
+                              <span className="font-semibold text-[#241414] dark:text-white">
                                 Requirement: {exp.requirement}
                               </span>
                               <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300">
@@ -778,18 +796,18 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                               </span>
                             </div>
                             <p className="text-[11px] text-[#52525B] dark:text-[#A1A1AA]">
-                              <strong className="text-[#111114] dark:text-[#D4D4D8]">Evidence: </strong>
+                              <strong className="text-[#241414] dark:text-[#D4D4D8]">Evidence: </strong>
                               {exp.evidence}
                             </p>
                             <p className="text-[11px] text-[#52525B] dark:text-[#A1A1AA]">
-                              <strong className="text-[#111114] dark:text-[#D4D4D8]">Why this matters: </strong>
+                              <strong className="text-[#241414] dark:text-[#D4D4D8]">Why this matters: </strong>
                               {exp.relevance}
                             </p>
                             <a
                               href={exp.sourceUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-[10px] font-mono text-[#6D4AFF] hover:text-[#5B3FD6] pt-0.5"
+                              className="inline-flex items-center gap-1 text-[10px] font-mono text-[#E63946] hover:text-[#D62839] pt-0.5"
                             >
                               <span>Source: {exp.sourceTitle}</span>
                               <ExternalLink className="w-2.5 h-2.5" />
@@ -801,7 +819,7 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                   </div>
 
                   {/* BOTTOM ACTION BAR */}
-                  <div className="px-6 py-3.5 bg-[#FAFAFC] dark:bg-white/[0.02] border-t border-[#E5E7EB] dark:border-white/[0.06] flex items-center justify-between text-xs">
+                  <div className="px-6 py-3.5 bg-[#FFFDF9] dark:bg-white/[0.02] border-t border-[#F0DED7] dark:border-white/[0.06] flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2">
                       <span className="font-mono text-[#71717A] dark:text-[#A1A1AA] text-[11px]">
                         Evidence: {rec.evidenceList.length} verified source{rec.evidenceList.length !== 1 ? 's' : ''}
@@ -811,14 +829,14 @@ export const ModelRecommendationView: React.FC<ModelRecommendationViewProps> = (
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setExpandedModelId(isExpanded ? null : model.id)}
-                        className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/[0.05] hover:bg-[#F1F1F5] dark:hover:bg-white/[0.1] text-[#111114] dark:text-[#E4E4E7] border border-[#D9DCE3] dark:border-transparent text-[11px] font-medium transition-colors"
+                        className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/[0.05] hover:bg-[#FDF9F7] dark:hover:bg-white/[0.1] text-[#241414] dark:text-[#E4E4E7] border border-[#F0DED7] dark:border-transparent text-[11px] font-medium transition-colors cursor-pointer"
                       >
                         {isExpanded ? 'Hide Evidence' : 'View Evidence'}
                       </button>
 
                       <button
                         onClick={() => setInspectModel(model)}
-                        className="px-2.5 py-1 rounded-lg bg-[#F0EBFF] hover:bg-[#E5DCFF] text-[#6941D9] border border-[#DDD3FF] text-[11px] font-semibold transition-colors"
+                        className="px-2.5 py-1 rounded-lg bg-[#FFF1F2] hover:bg-[#FFE4E6] text-[#E63946] border border-[#FECDD3] text-[11px] font-semibold transition-colors cursor-pointer"
                       >
                         Model Profile
                       </button>

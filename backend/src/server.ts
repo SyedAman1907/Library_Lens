@@ -1,12 +1,8 @@
+import './config/env.js';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-// Load environment variables from backend or root .env
-dotenv.config();
-dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
 
 import { connectDatabase } from './models/db.js';
 import researchRouter from './api/routes/research.routes.js';
@@ -14,6 +10,7 @@ import libraryRouter from './api/routes/library.routes.js';
 import healthRouter from './api/routes/health.routes.js';
 import modelRouter from './api/routes/model.routes.js';
 import { modelScheduler } from './services/model_scheduler.js';
+import { RecommendationController } from './controllers/recommendation.controller.js';
 import { logger } from './utils/logger.js';
 
 const app = express();
@@ -40,6 +37,10 @@ app.use('/api/research', researchRouter);
 app.use('/api/library', libraryRouter);
 app.use('/api/health', healthRouter);
 app.use('/api/models', modelRouter);
+
+// Direct top-level recommendations endpoint alias
+app.post('/api/recommendations', RecommendationController.analyzeAndRecommend);
+app.get('/api/recommendations', RecommendationController.listSavedUseCases);
 
 // Global Error Handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

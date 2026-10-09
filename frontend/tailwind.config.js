@@ -8,49 +8,52 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Semantic theme tokens driven by CSS variables
-        page: 'var(--background)',
+        background: '#FFFDF9',
         surface: {
-          DEFAULT: 'var(--surface)',
-          muted: 'var(--surface-muted)',
-          hover: 'var(--surface-hover)',
-          card: 'var(--surface)',
+          DEFAULT: '#FFFFFF',
+          soft: '#FFF8F3',
+          hover: '#FFF3EB',
         },
-        borderTheme: {
-          DEFAULT: 'var(--border)',
-          strong: 'var(--border-strong)',
+        borderBase: {
+          DEFAULT: '#F0DED7',
+          strong: '#E8C8BD',
         },
-        textTheme: {
-          primary: 'var(--text-primary)',
-          secondary: 'var(--text-secondary)',
-          muted: 'var(--text-muted)',
+        content: {
+          primary: '#241414',
+          secondary: '#674B48',
+          muted: '#9B8580',
         },
-        // Refined Violet/Indigo Accent System (Prompt #3)
-        brand: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#8b72ff',
-          500: '#6D4AFF', // Primary Violet Accent
-          600: '#5B3FD6', // Hover Violet
-          700: '#4c2bb8',
-          800: '#3c1f96',
-          900: '#2d1474',
-          950: '#1b0b4b',
+        // RED: Primary action / important
+        crimson: {
+          DEFAULT: '#E63946',
+          dark: '#C92D3A',
+          soft: '#FFF1F2',
+          border: '#FECDD3',
         },
-        accent: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#7C5CFF', // Secondary Accent
-          600: '#6D4AFF',
-          700: '#5b3fd6',
-          800: '#4c2bb8',
-          900: '#3c1f96',
+        // PINK: AI / intelligence
+        roseai: {
+          DEFAULT: '#EC4899',
+          dark: '#BE185D',
+          soft: '#FCE7F3',
+          border: '#FBCFE8',
         },
+        // YELLOW: Discovery / new
+        ambernew: {
+          DEFAULT: '#FACC15',
+          dark: '#CA8A04',
+          soft: '#FEF9C3',
+          border: '#FEF08A',
+        },
+        // GOLD: Recommendation / premium / LibraryLens Pick
+        goldpick: {
+          DEFAULT: '#D4A017',
+          light: '#F5D76E',
+          soft: '#FFFDF0',
+          border: '#FDE68A',
+        },
+        statusSuccess: '#16A34A',
+        statusWarning: '#D97706',
+        statusError: '#DC2626',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
@@ -58,15 +61,13 @@ export default {
         mono: ['JetBrains Mono', 'Fira Code', 'Menlo', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
-        'glow-violet': '0 0 25px -5px rgba(139, 92, 246, 0.25)',
-        'glow-indigo': '0 0 25px -5px rgba(99, 102, 241, 0.2)',
-        'card': '0 0 0 1px rgba(255, 255, 255, 0.07), 0 4px 16px -2px rgba(0, 0, 0, 0.5)',
-        'elevated': '0 0 0 1px rgba(255, 255, 255, 0.09), 0 12px 32px -4px rgba(0, 0, 0, 0.7)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.3)',
+        'subtle': '0 1px 3px 0 rgba(36, 20, 20, 0.05)',
+        'card': '0 4px 20px -2px rgba(36, 20, 20, 0.05), 0 1px 3px 0 rgba(36, 20, 20, 0.03)',
+        'elevated': '0 12px 36px -4px rgba(36, 20, 20, 0.08), 0 2px 6px 0 rgba(36, 20, 20, 0.04)',
+        'gold-highlight': '0 8px 30px -4px rgba(212, 160, 23, 0.20)',
+        'red-cta': '0 4px 14px 0 rgba(230, 57, 70, 0.35)',
       },
       animation: {
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'fade-in': 'fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
         'slide-down': 'slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
       },

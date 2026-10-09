@@ -46,7 +46,7 @@ export async function analyzeResearchQuestion(
   if (apiKey) {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL || 'gemini-3.8-flash' });
       const prompt = `You are a software engineering research agent. Analyze this developer query:
 "${cleanQ}"
 

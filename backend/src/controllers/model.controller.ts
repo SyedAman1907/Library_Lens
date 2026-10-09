@@ -3,6 +3,7 @@ import { AiModelDao } from '../models/ai_model.schema.js';
 import { modelDiscoveryService } from '../services/model_discovery.service.js';
 import { modelResearchQueue } from '../services/model_research_queue.service.js';
 import { providerRegistry } from '../models/providers/provider.registry.js';
+import { modelComparisonService } from '../services/model_comparison.service.js';
 import { ModelRadarStats } from '../types/model.types.js';
 import { logger } from '../utils/logger.js';
 
@@ -161,49 +162,28 @@ export class ModelController {
   // POST /api/models/compare
   static async compareModels(req: Request, res: Response) {
     try {
-      const { modelA, modelB } = req.body;
+      const { modelA, modelB, requirements, compareId, forceRefresh } = req.body;
       if (!modelA || !modelB) {
-        res.status(400).json({ error: 'Bad Request', message: 'modelA and modelB identifiers required (e.g. google:gemini-1.5-pro)' });
-        return;
-      }
-
-      const [recordA, recordB] = await Promise.all([
-        AiModelDao.findById(modelA.toLowerCase()),
-        AiModelDao.findById(modelB.toLowerCase())
-      ]);
-
-      if (!recordA || !recordB) {
-        res.status(404).json({
-          error: 'Not Found',
-          message: `One or both models not found: [${modelA}: ${!!recordA}, ${modelB}: ${!!recordB}]`
+        res.status(400).json({
+          error: 'Bad Request',
+          message: 'modelA and modelB identifiers are required (e.g. google:gemini-1.5-pro vs anthropic:claude-3-5-sonnet)'
         });
         return;
       }
 
-      // Compute capability diff
-      const capsA = new Set(recordA.capabilities);
-      const capsB = new Set(recordB.capabilities);
-      const sharedCapabilities = recordA.capabilities.filter(c => capsB.has(c));
-      const onlyInA = recordA.capabilities.filter(c => !capsB.has(c));
-      const onlyInB = recordB.capabilities.filter(c => !capsA.has(c));
+      logger.info('Comparing models with live research', { modelA, modelB, requirements });
 
-      res.json({
-        modelA: recordA,
-        modelB: recordB,
-        comparison: {
-          contextRatio: (recordA.contextWindow && recordB.contextWindow) ? (recordA.contextWindow / recordB.contextWindow).toFixed(2) : null,
-          sharedCapabilities,
-          onlyInA,
-          onlyInB,
-          pricingComparison: {
-            inputA: recordA.inputPricing,
-            inputB: recordB.inputPricing,
-            outputA: recordA.outputPricing,
-            outputB: recordB.outputPricing
-          }
-        }
+      const result = await modelComparisonService.compare({
+        modelA,
+        modelB,
+        requirements: typeof requirements === 'string' ? requirements : '',
+        compareId: typeof compareId === 'string' ? compareId : undefined,
+        forceRefresh: forceRefresh === true
       });
+
+      res.json(result);
     } catch (err: any) {
+      logger.error('Failed to compare models', { error: err.message });
       res.status(500).json({ error: 'Failed to compare models', message: err.message });
     }
   }

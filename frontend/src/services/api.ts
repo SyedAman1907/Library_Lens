@@ -245,11 +245,17 @@ export async function markModelNotificationRead(id: string): Promise<void> {
   await fetch(`${API_BASE}/models/notifications/${encodeURIComponent(id)}/read`, { method: 'PUT' });
 }
 
-export async function compareAiModels(modelA: string, modelB: string): Promise<import('../types').ModelComparisonResult> {
+export async function compareAiModels(
+  modelA: string,
+  modelB: string,
+  requirements?: string,
+  compareId?: string,
+  forceRefresh?: boolean
+): Promise<import('../types').ModelComparisonResult> {
   const res = await fetch(`${API_BASE}/models/compare`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ modelA, modelB })
+    body: JSON.stringify({ modelA, modelB, requirements, compareId, forceRefresh })
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));

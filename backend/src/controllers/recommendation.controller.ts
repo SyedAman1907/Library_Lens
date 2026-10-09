@@ -5,22 +5,47 @@ import { logger } from '../utils/logger.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export class RecommendationController {
-  // POST /api/models/recommendations/analyze
+  // POST /api/models/recommendations/analyze & POST /api/recommendations
   static async analyzeAndRecommend(req: Request, res: Response) {
     try {
-      const { prompt, constraints } = req.body;
-      if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
-        res.status(400).json({ error: 'Bad Request', message: 'A natural language requirement prompt is required.' });
+      const promptText = (req.body.prompt || req.body.requirements || '').toString().trim();
+      let constraints = req.body.constraints;
+
+      if (!constraints && Array.isArray(req.body.preferences)) {
+        constraints = {
+          notes: req.body.preferences.join(', ')
+        };
+      }
+
+      if (!promptText) {
+        res.status(400).json({
+          error: 'Bad Request',
+          message: 'A natural language requirement prompt or requirements string is required.'
+        });
         return;
       }
 
-      logger.info('Analyzing user requirements for model recommendation', { prompt });
+      logger.info('Analyzing user requirements for model recommendation', { promptText });
       const analysis = await modelRecommendationService.analyzeAndRecommend({
-        prompt: prompt.trim(),
+        prompt: promptText,
         constraints
       });
 
-      res.status(200).json(analysis);
+      // Format response with both rich analysis structure and Section 17 standard properties
+      const responsePayload = {
+        ...analysis,
+        // Section 17 schema compatibility aliases:
+        requirements: promptText,
+        reasoning: analysis.recommendations.map(r => ({
+          model: r.model.displayName,
+          score: r.suitabilityScore,
+          fitSummary: r.whyItFits[0] || 'Matches stated use case requirements',
+          points: r.whyItFits
+        })),
+        evidence: analysis.recommendations.flatMap(r => r.evidenceList || [])
+      };
+
+      res.status(200).json(responsePayload);
     } catch (err: any) {
       logger.error('Failed to generate recommendation', { error: err.message });
       res.status(500).json({ error: 'Failed to generate recommendation', message: err.message });
