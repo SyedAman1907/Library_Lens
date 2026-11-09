@@ -404,17 +404,9 @@ Rather than treating an AI-generated answer as unquestionable, LibraryLens encou
 
 ---
 
-## Demo and Links
-
-| Resource          | Link                                                                      |
-| ----------------- | ------------------------------------------------------------------------- |
-| GitHub Repository | [SyedAman1907/Library_Lens](https://github.com/SyedAman1907/Library_Lens) |
 
 
-## Author
 
-**Syed Aman Mirzanullah**
-Project Lead · Full-Stack Development · AI Research Systems
 
 ---
 
